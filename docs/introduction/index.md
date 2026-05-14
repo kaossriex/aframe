@@ -1,179 +1,362 @@
----
-title: Introduction
-section_title: Introduction
-type: introduction
-layout: docs
-order: 1
-parent_section: docs
-section_order: 1
-installation: true
-examples:
-  - title: Hello, World!
-    src: https://glitch.com/edit/#!/aframe?path=index.html
----
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LA NIEBLA 3D</title>
 
-[three.js]: https://threejs.org
+<style>
+html, body{
+    margin:0;
+    overflow:hidden;
+    background:black;
+    font-family:Arial, sans-serif;
+}
 
-## Getting Started
+canvas{
+    display:block;
+}
 
-[glitch]: http://glitch.com/~aframe
+#startScreen{
+    position:fixed;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(to bottom, #000000, #17001f);
+    z-index:100;
+}
 
-A-Frame can be developed from a plain HTML file without having to install
-anything. A great way to try out A-Frame is to **[remix the starter example on
-Glitch][glitch]**, an online code editor that instantly hosts and deploys for
-free. Alternatively, create an `.html` file and include A-Frame in the
-`<head>`:
+#panel{
+    text-align:center;
+    padding:40px;
+    border-radius:20px;
+    background:rgba(0,0,0,0.8);
+    border:2px solid #00ffff;
+    box-shadow:0 0 30px #00ffff;
+}
 
-```html
-<html>
-  <head>
-    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
-  </head>
-  <body>
-    <a-scene>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
-    </a-scene>
-  </body>
-</html>
-```
+#panel h1{
+    color:#00ffff;
+    font-size:52px;
+    margin-bottom:10px;
+}
 
-[Installation]: ./installation.md
-[school]: https://aframe.io/school/
+#panel p{
+    color:white;
+    margin-bottom:25px;
+}
 
-The [Installation] page provides more options for getting started with A-Frame.
-To get started learning A-Frame, check out [A-Frame School][school] for visual
-step-by-step lessons to complement the documentation.
+#enterBtn{
+    padding:16px 35px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:20px;
+    font-weight:bold;
+    background:#00ffff;
+    transition:0.3s;
+}
 
-## What is A-Frame?
+#enterBtn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px #00ffff;
+}
 
-[github]: https://github.com/aframevr/
-[community]: https://aframe.io/community/
+#info{
+    position:absolute;
+    top:10px;
+    left:10px;
+    color:white;
+    z-index:5;
+    background:rgba(0,0,0,0.5);
+    padding:10px;
+    border-radius:10px;
+}
+</style>
+</head>
 
-![A-Frame](https://cloud.githubusercontent.com/assets/674727/25392020/6f011d10-298c-11e7-845e-c3c5baebd14d.jpg)
+<body>
 
-:a:-Frame is a web framework for building virtual reality (VR) experiences.
-A-Frame is based on top of HTML, making it simple to get started. But A-Frame
-is not just a 3D scene graph or a markup language; the core is a powerful
-entity-component framework that provides a declarative, extensible, and
-composable structure to [three.js].
-
-Originally conceived within Mozilla and now maintained by the co-creators of
-A-Frame within [Supermedium](https://supermedium.com), A-Frame was developed to
-be an easy yet powerful way to develop VR content. As an [independent open
-source project][github], A-Frame has grown to be one of the [largest VR
-communities][community].
-
-A-Frame supports most VR and AR devices such as Meta Quest, Apple Vision Pro, PICO lineup, Lynx-R1 or Valve Index 
-Although A-Frame supports the whole spectrum, A-Frame aims to define
-fully immersive interactive VR experiences that go beyond basic 360&deg;
-content, making full use of positional tracking and controllers.
-
-<div class="docs-introduction-examples">
-  <a href="https://supermedium.com/supercraft">
-    <img alt="Supercraft" target="_blank" src="https://user-images.githubusercontent.com/674727/41085457-f5429566-69eb-11e8-92e5-3210e4c6c4a0.gif" height="190" width="32%">
-  </a>
-  <a href="https://aframe.io/a-painter/?url=https://ucarecdn.com/962b242b-87a9-422c-b730-febdc470f203/">
-    <img alt="A-Painter" target="_blank" src="https://cloud.githubusercontent.com/assets/674727/24531388/acfc3dda-156d-11e7-8563-5bd75252f70f.gif" height="190" width="32%">
-  </a>
-  <a href="https://supermedium.com">
-    <img alt="Supermedium" target="_blank" src="https://user-images.githubusercontent.com/674727/37294616-7212cd20-25d3-11e8-9e7f-c0c61074f1e0.png" height="190" width="32%">
-  </a>
-  <a href="https://aframe.io/a-blast/">
-    <img alt="A-Blast" target="_blank" src="https://cloud.githubusercontent.com/assets/674727/24531440/0336e66e-156e-11e7-95c2-f2e6ebc0393d.gif" height="190" width="32%">
-  </a>
-  <a href="https://aframe.io/a-saturday-night/">
-    <img alt="A-Saturday-Night" target="_blank" src="https://cloud.githubusercontent.com/assets/674727/24531477/44272daa-156e-11e7-8ef9-d750ed430f3a.gif" height="190" width="32%">
-  </a>
-  <a href="https://github.com/googlecreativelab/webvr-musicalforest">
-    <img alt="Musical Forest by @googlecreativelab" target="_blank" src="https://cloud.githubusercontent.com/assets/674727/25109861/b8e9ec48-2394-11e7-8f2d-ea1cd9df69c8.gif" height="190" width="32%">
-  </a>
+<div id="startScreen">
+    <div id="panel">
+        <h1>LA NIEBLA</h1>
+        <p>Night Club Experience 3D</p>
+        <button id="enterBtn">ENTRAR AL CLUB</button>
+    </div>
 </div>
 
-## Features
+<div id="info">
+WASD = Moverse<br>
+Mouse = Cámara
+</div>
 
-:eyeglasses: **VR Made Simple**: Just drop in a `<script>` tag and `<a-scene>`.
-A-Frame will handle 3D boilerplate, VR setup, and default controls. Nothing to
-install, no build steps.
+<script type="module">
 
-:heart: **Declarative HTML**: HTML is easy to read, understand, and
-copy-and-paste. Being based on top of HTML, A-Frame is accessible to everyone:
-web developers, VR enthusiasts, artists, designers, educators, makers, kids.
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+import { PointerLockControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/PointerLockControls.js';
 
-:electric_plug: **Entity-Component Architecture**: A-Frame is a powerful
-[three.js] framework, providing a declarative, composable, reusable
-[entity-component structure][ecs]. HTML is just the tip of the iceberg;
-developers have unlimited access to JavaScript, DOM APIs, three.js, WebVR, and
-WebGL.
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x050505);
+scene.fog = new THREE.FogExp2(0x111111, 0.025);
 
-:globe_with_meridians: **Cross-Platform VR**: Build VR applications for Vive,
-Rift, Meta Quest, Windows Mixed Reality, and Apple Vision Pro with support for
-all respective controllers. Don't have a headset or controllers? No problem!
-A-Frame still works on standard desktop and smartphones.
+const camera = new THREE.PerspectiveCamera(
+75,
+window.innerWidth/window.innerHeight,
+0.1,
+1000
+);
 
-[ecs]: ./entity-component-system.md
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+document.body.appendChild(renderer.domElement);
 
-[A-Painter]: https://github.com/aframevr/a-painter
-[Tilt Brush]: https://www.tiltbrush.com/
+const controls = new PointerLockControls(camera, document.body);
+scene.add(controls.getObject());
 
-:zap: **Performance**: A-Frame is optimized from the ground up for WebVR. While
-A-Frame uses the DOM, its elements don't touch the browser layout engine. 3D
-object updates are all done in memory with little garbage and overhead. The most
-interactive and large scale WebVR applications have been done in A-Frame
-running smoothly at 90fps.
+const startScreen = document.getElementById("startScreen");
+const enterBtn = document.getElementById("enterBtn");
 
-[inspector]: ./visual-inspector-and-dev-tools.md
+enterBtn.addEventListener("click", ()=>{
 
-:mag: **Visual Inspector**: A-Frame provides a handy built-in [visual 3D
-inspector][inspector]. Open up *any* A-Frame scene, hit `<ctrl> + <alt> + i` or `<ctrl> + <option> + i`,
-and fly around to peek under the hood!
+    startScreen.style.display = "none";
+    controls.lock();
 
-![Inspector](https://cloud.githubusercontent.com/assets/674727/25377018/27be9cce-295b-11e7-9098-3e85ac1fe172.gif)
+});
 
-[augmented reality]: https://github.com/jeromeetienne/AR.js#augmented-reality-for-the-web-in-less-than-10-lines-of-html
-[environment]: https://github.com/supermedium/aframe-environment-component
-[multiuser]: https://github.com/networked-aframe/networked-aframe
-[oceans]: https://github.com/c-frame/aframe-extras/tree/master/src/primitives
-[particle systems]: https://github.com/c-frame/aframe-particle-system-component
-[physics]: https://github.com/c-frame/aframe-physics-system
-[state]: https://npmjs.com/package/aframe-state-component
-[super hands]: https://github.com/c-frame/aframe-super-hands-component
-[teleportation]: https://github.com/jure/aframe-blink-controls
+// luces
+const ambient = new THREE.AmbientLight(0xffffff,0.4);
+scene.add(ambient);
 
-:runner: **Components**: Hit the ground running with A-Frame's core components
-such as geometries, materials, lights, animations, models, raycasters, shadows,
-positional audio, text, and controls for most major headsets. Get even further
-from the hundreds of community components including [environment], [state], [particle
-systems], [physics], [multiuser], [oceans], [teleportation], [super hands], and
-[augmented reality].
+const neon1 = new THREE.PointLight(0xff00ff,3,50);
+neon1.position.set(0,10,0);
+scene.add(neon1);
 
-:earth_americas: **Proven and Scalable**: A-Frame has been used by companies
-such as Google, Disney, Samsung, Toyota, Ford, Chevrolet, Amnesty
-International, CERN, NPR, Al Jazeera, The Washington Post, NASA. Companies such
-as Google, Microsoft, Oculus, and Samsung have made contributions to A-Frame.
+const neon2 = new THREE.PointLight(0x00ffff,3,50);
+neon2.position.set(20,10,-10);
+scene.add(neon2);
 
-## Off You Go!
+const neon3 = new THREE.PointLight(0xff0000,2,50);
+neon3.position.set(-20,10,-10);
+scene.add(neon3);
 
-[Discord]: https://supermedium.com/discord
+// piso
+const floorGeo = new THREE.PlaneGeometry(120,120);
+const floorMat = new THREE.MeshStandardMaterial({
+    color:0x111111,
+    metalness:0.8,
+    roughness:0.2
+});
 
-If it's your first time here, here's a plan for success for getting into
-A-Frame:
+const floor = new THREE.Mesh(floorGeo,floorMat);
+floor.rotation.x = -Math.PI/2;
+scene.add(floor);
 
-1. Read through the documentation to get a grasp.
-[Glitch](https://glitch.com/~aframe) is used as a recommended coding playground
-and for examples.
+// paredes
+function wall(x,z,w,h,d,color=0x1a1a1a){
 
-2. [Join us on Discord][Discord] if you have any
-questions, [search and ask on StackOverflow](http://stackoverflow.com/questions/ask/?tags=aframe),
-and someone will try to get to you!
+    const geo = new THREE.BoxGeometry(w,h,d);
+    const mat = new THREE.MeshStandardMaterial({color});
 
-3. When you build something, share your project online on X with the
-   `@aframevr` mention. You can also post it on the #self-promotion channel on
-   [Supermedium Discord][Discord] and #a-frame channel on
-   [WebXR Discord](https://discord.gg/jJxvuW97c4).
+    const mesh = new THREE.Mesh(geo,mat);
 
-And it really helps to have a dig into the fundamentals on JavaScript and
-[three.js](https://threejs.org/). Have fun!
+    mesh.position.set(x,h/2,z);
+
+    scene.add(mesh);
+
+}
+
+wall(0,-60,120,15,2);
+wall(0,60,120,15,2);
+wall(-60,0,2,15,120);
+wall(60,0,2,15,120);
+
+// barra
+function createBar(){
+
+    const geo = new THREE.BoxGeometry(25,3,5);
+
+    const mat = new THREE.MeshStandardMaterial({
+        color:0x222222,
+        emissive:0x00ffff,
+        emissiveIntensity:0.4
+    });
+
+    const bar = new THREE.Mesh(geo,mat);
+
+    bar.position.set(28,1.5,10);
+
+    scene.add(bar);
+
+}
+
+createBar();
+
+// mesas de billar
+function createPoolTable(x,z){
+
+    const geo = new THREE.BoxGeometry(10,1.5,5);
+
+    const mat = new THREE.MeshStandardMaterial({
+        color:0x006600,
+        emissive:0x003300,
+        emissiveIntensity:0.3
+    });
+
+    const table = new THREE.Mesh(geo,mat);
+
+    table.position.set(x,1,z);
+
+    scene.add(table);
+
+}
+
+createPoolTable(-35,-20);
+createPoolTable(-35,5);
+
+// zona vip
+function createVIP(){
+
+    const geo = new THREE.BoxGeometry(18,1,12);
+
+    const mat = new THREE.MeshStandardMaterial({
+        color:0x220022,
+        emissive:0xff00ff,
+        emissiveIntensity:0.4
+    });
+
+    const vip = new THREE.Mesh(geo,mat);
+
+    vip.position.set(35,0.5,-25);
+
+    scene.add(vip);
+
+}
+
+createVIP();
+
+// personas
+function createPerson(x,z,color){
+
+    const geo = new THREE.CapsuleGeometry(0.7,2.2,4,8);
+
+    const mat = new THREE.MeshStandardMaterial({
+        color,
+        emissive:color,
+        emissiveIntensity:0.2
+    });
+
+    const person = new THREE.Mesh(geo,mat);
+
+    person.position.set(x,2,z);
+
+    scene.add(person);
+
+}
+
+for(let i=0;i<20;i++){
+
+    createPerson(
+        Math.random()*70-35,
+        Math.random()*70-35,
+        Math.random()*0xffffff
+    );
+
+}
+
+// tubos neon
+for(let i=-50;i<=50;i+=10){
+
+    const geo = new THREE.BoxGeometry(8,0.3,0.3);
+
+    const mat = new THREE.MeshStandardMaterial({
+        color:0x00ffff,
+        emissive:0x00ffff,
+        emissiveIntensity:3
+    });
+
+    const tube = new THREE.Mesh(geo,mat);
+
+    tube.position.set(i,13,0);
+
+    scene.add(tube);
+
+}
+
+// movimiento
+camera.position.set(0,3,20);
+
+const keys = {
+    w:false,
+    a:false,
+    s:false,
+    d:false
+};
+
+const velocity = new THREE.Vector3();
+const direction = new THREE.Vector3();
+
+window.addEventListener("keydown",(e)=>{
+
+    if(e.key.toLowerCase()==="w") keys.w=true;
+    if(e.key.toLowerCase()==="a") keys.a=true;
+    if(e.key.toLowerCase()==="s") keys.s=true;
+    if(e.key.toLowerCase()==="d") keys.d=true;
+
+});
+
+window.addEventListener("keyup",(e)=>{
+
+    if(e.key.toLowerCase()==="w") keys.w=false;
+    if(e.key.toLowerCase()==="a") keys.a=false;
+    if(e.key.toLowerCase()==="s") keys.s=false;
+    if(e.key.toLowerCase()==="d") keys.d=false;
+
+});
+
+function animate(){
+
+    requestAnimationFrame(animate);
+
+    velocity.x *= 0.9;
+    velocity.z *= 0.9;
+
+    direction.z = Number(keys.w) - Number(keys.s);
+    direction.x = Number(keys.d) - Number(keys.a);
+
+    direction.normalize();
+
+    if(keys.w || keys.s){
+        velocity.z -= direction.z * 0.15;
+    }
+
+    if(keys.a || keys.d){
+        velocity.x -= direction.x * 0.15;
+    }
+
+    controls.moveRight(-velocity.x);
+    controls.moveForward(-velocity.z);
+
+    neon1.intensity = 2 + Math.sin(Date.now()*0.003);
+    neon2.intensity = 2 + Math.cos(Date.now()*0.002);
+
+    renderer.render(scene,camera);
+
+}
+
+animate();
+
+window.addEventListener("resize", ()=>{
+
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+});
+
+</script>
+
+</body>
+</html>
